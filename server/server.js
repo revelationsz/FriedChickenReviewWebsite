@@ -12,8 +12,7 @@ const corsOptions ={
 }
 
 //
-//mongodb://localhost:27017/fkreview
-mongoose.connect('mongodb+srv://sarsenw:sarsen100@mycluster.tqcwmv7.mongodb.net/fkreview?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://<username>:<password>@mycluster.tqcwmv7.mongodb.net/fkreview?retryWrites=true&w=majority', { useNewUrlParser: true })
 .then(( ) => {
     const app = express();
     app.use(bodyParser.json()); // <--- Here
