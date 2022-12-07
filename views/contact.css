@@ -1,0 +1,9 @@
+
+.contact > h2 {
+    margin-top: 70px
+}
+
+.contact > h2 + p {
+    margin-top: 50px;
+}
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="slider.css">
+        <link rel="stylesheet" href="header.css">
+        <link rel="stylesheet" href="about.css">
+
+        <title>FK reviews</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcBwEq_tu9EGQlO47jBjOPjtu0KYJpW80&libraries=places,maps&components=postal_code:01234"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" src="header_footer.js"></script>
+        <script type="text/javascript" src="googleMaps.js"></script>
+        <script>
+
+         
+          class Restraunt {
+                constructor(name, rating, link, review) {
+                    this.name = name
+                    this.rating = rating
+                    this.link = link
+                    this.review = review
+                }
+            }
+
+            window.addEventListener("DOMContentLoaded", e => {
+                let arg = new URLSearchParams(window.location.search).get('restraunt');
+                
+                // if(arg == null){
+                //     window.location.href = "listings.html"
+                // }
+
+                let initiation = () => {
+                    let x = localStorage.getItem("darkMode") 
+                    if(x == "dark"){
+                    intoDarkMode() 
+                    document.getElementById("darkmode").checked = "true"
+                    } else {
+                        outOfDarkMode()
+                    }
+                }
+
+                initiation()
+
+                const colorScheme = function(){
+                    const currentMode = localStorage.getItem("darkMode")
+                    console.log(currentMode)
+                    if(currentMode != "light"){
+                        outOfDarkMode()
+                        localStorage.setItem("darkMode", "light")
+                    } else {
+                        intoDarkMode()
+                        localStorage.setItem("darkMode", "dark")
+                    }
+                }
+
+                document.getElementById("darkmode").addEventListener("click", e => colorScheme())
+
+                function getReview() {
+                    let url = "http://localhost:8001/api/reviews/"+arg
+                    axios.get(url)
+                    .then(response => {
+                        // if(response.data == "") window.location.href = "listings.html"
+                        // else {
+                            document.getElementById("name").innerText = response.data.name
+                            document.getElementById("rating").innerText = response.data.rating
+                            document.getElementById("currReview").innerText = response.data.review
+                        // }
+                    })
+                    .catch(error => {window.location.href = "listings.html"}) 
+                }   
+
+                getReview()
+
+
+                let long;
+                let lat;
+                getLocation()
+
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(getLongLat);
+                    } else {
+                        console.log("Cannot access location")
+                    }
+                }
+
+                function getLongLat(position) {
+                    long = position.coords.longitude
+                    lat = position.coords.latitude
+                    console.log(lat, long)
+                }
+
+                document.getElementById("closePopUp").addEventListener("click", function() {
+                   document.getElementById("mapPopUp").classList.replace("show","hidden")
+                   document.getElementById("restrauntInfoFull").classList.replace("hidden", "showInfoPage")
+                })
+
+            
+                
+
+
+                $('#popupActivator').on('click', function () {
+                    $('#mapPopUp').toggleClass('active').focus();
+                });
+
+                
+                document.getElementById("popupActivator").addEventListener("click", function() {
+                    document.getElementById("mapPopUp").classList.replace("hidden","show")
+                    document.getElementById("restrauntInfoFull").classList.replace("showInfoPage", "hidden")
+                    initMap(arg, lat, long)  
+
+                })
+
+                let prevDisplay = "info";
+
+                document.getElementById("about").addEventListener("mouseover", e => {
+                    if(document.getElementById("mapPopUp").classList.contains("show")){
+                        document.getElementById("mapPopUp").classList.replace("show","hidden")
+                        prevDisplay = "map"
+                    } else {
+                        document.getElementById("restrauntInfoFull").classList.replace("showInfoPage", "hidden")
+                        prevDisplay = "info"
+                    }
+                    document.getElementById("popup").classList.replace("hidden", "mainBody")
+                    document.getElementById("aboutSection").classList.replace("hidden", "show")
+                })
+
+                document.getElementById("about").addEventListener("mouseleave", e => {
+                    if(prevDisplay == "map"){
+                        document.getElementById("mapPopUp").classList.replace("hidden","show")
+                    } else if (prevDisplay == "info"){
+                        document.getElementById("restrauntInfoFull").classList.replace("hidden", "showInfoPage")
+                    }
+                    document.getElementById("popup").classList.replace("mainBody", "hidden")
+                    document.getElementById("aboutSection").classList.replace("show", "hidden")
+
+                })
+
+                document.getElementById("contact").addEventListener("mouseover", e => {
+                    if(document.getElementById("mapPopUp").classList.contains("show")){
+                        document.getElementById("mapPopUp").classList.replace("show","hidden")
+                        prevDisplay = "map"
+                    } else {
+                        document.getElementById("restrauntInfoFull").classList.replace("showInfoPage", "hidden")
+                        prevDisplay = "info"
+                    }
+                    document.getElementById("popup").classList.replace("hidden", "mainBody")
+                    document.getElementById("contactSection").classList.replace("hidden", "show")
+
+                })
+
+                document.getElementById("contact").addEventListener("mouseleave", e => {
+                    if(prevDisplay == "map"){
+                        document.getElementById("mapPopUp").classList.replace("hidden","show")
+                    } else if (prevDisplay == "info"){
+                        document.getElementById("restrauntInfoFull").classList.replace("hidden", "showInfoPage")
+                    }
+                    document.getElementById("popup").classList.replace("mainBody", "hidden")
+                    document.getElementById("contactSection").classList.replace("show", "hidden")
+
+                })
+
+                document.getElementById("postDeletion").addEventListener("click", e =>{ 
+                    let url = "http://localhost:8001/api/reviews/"+arg
+                    axios.delete(url).then(response =>  window.location.href = "listings.html").catch(error => console.log(error))
+                })
+            })
+        </script>
+    </head>
+    
+
+
+    <header id="header"  class="d-flex justify-content-between p-2">
+        <div class="container-fluid">
+            <div class="row m-0" id="holder">
+                <a href="landingPage.html" id="home" class="light d-flex align-items-center justify-content-center">
+                    <h2>Fried Chicken Reviews</h2>
+                </a>
+                <a id="restraunts"  href="listings.html" class="light d-flex align-items-center justify-content-center ml-auto">
+                    <h4>Restaurants</h4>
+                </a>
+                <div class="text-center darkmode">
+                    <label class="switch">
+                        <input id="darkmode" type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <body>
+        <div class="mapPopUpActive hidden" id="mapPopUp">
+            <div class="closePopUp text-center" id="closePopUp">Close</div>
+            <div id="mapView"></div>
+        </div>
+        <div  id="title" class=" container title d-flex justify-content-around align-items-center" >
+            <div class="showInfoPage fullInfoLight row restrauntInfoFull" id="restrauntInfoFull">
+                <h1 id="name" class=" col-12 mt-4 text-center"></h1>
+                <h5 id="rating" class="col-12 text-center m-auto"></h5>
+                <p id="currReview" class="col-12 text-center"></p>
+                <div class="col-12 d-flex justify-content-center" >
+                     <p class="closePopUpLight text-center" id="popupActivator">Find my closest location</p>
+                </div>
+                <div class="col-12 d-flex justify-content-center" >
+                    <div id="postDeletion" class="text-center">Delete Post</div>
+                </div>
+            </div>
+            <div id="popup" class="hidden backgroundLight text-center">
+                <section id="aboutSection" class="hidden text-center">
+                    <h2>About Me</h2>
+                    <p>
+                        I am Sarsen Whatmore, as senior at Boston University 
+                        majoring in computer science.  
+                        
+                        Living in boston during 
+                        my time at school, I have loved exploring the city and the
+                        all it has to offer. 
+                        And one of my favorite things I discovered 
+                        was all the amazing fried chicken restraunts around. And from 
+                        that I wanted to share my favorite places with people so I made 
+                        this site. 
+                    </p>
+                </section>
+                <section id="contactSection" class="hidden text-center">
+                   <h2>Contact Info</h2>
+                    <p>Email:</p>
+                    <p>Phone Number:</p>  
+                </section>
+            </div>  
+        </div>
+    </body>
+
+    <footer  id="footer" class="container-fluid">
+        <div class="row d-flex justify-content-around align-items-center p-2">
+            <h6 id="about" class="text-center light">About Us</h6> 
+            <h6 id="contact" class="text-center light" >Contact Us</h6> 
+     </div>
+     <div class="row d-flex justify-content-center align-items-center">
+             <h6 class="text-center light">Copyright &copy;</h6>
+     </div>
+    </footer>
+
+</html>

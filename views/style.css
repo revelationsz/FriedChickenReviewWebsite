@@ -1,0 +1,266 @@
+body {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.title {
+    height: 80vh;
+    width: 100vw;
+    background: url('fk2.jpg') center center/cover
+    no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* background-size: 100%; */
+}
+
+
+.title::before{
+    height: 80vh;
+    width: 100vw;
+    background-color: white ;
+    background-size: 100%;
+}
+
+a {
+    color: #000000;
+}   
+
+a:hover{
+    color:black;
+    text-decoration: none;
+}
+
+
+section > div > a, #review {
+    height: 150px;
+}
+
+#review{
+    width: 157px;
+}
+
+.addText{
+    padding-top:32%;
+}
+
+#review > h2 + h3 {
+    font-weight: 400;
+}
+
+.mapPopUpHidden{
+    display: none;
+}
+
+#addReview > h2{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.selectionLight:hover {
+    box-shadow: 10px 5px 5px rgba(146,166,190,255);   
+}
+
+.selectionDark:hover {
+    box-shadow: 10px 5px 5px #95622e;   
+}
+
+.mapPopUpActive{
+    display: none;
+    width: 75vw;
+    height: 500px;
+    background-color: rgb(255, 251, 251);
+    box-shadow: 10px 5px 5px #a8a6a5;   
+    border-radius: 15px;
+    position: absolute;
+    top: 23vh;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
+#mapPopUp::backdrop{
+    background-color: rgba(128, 128, 128, 0.268)
+}
+
+
+.closePopUp + div{
+    height: 90%;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 37px;
+}
+
+body > div > .closePopUp{
+    width: 50px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border-radius: 15px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+}
+
+.closePopUpLight:hover{
+    background-color: rgba(182, 182, 182, 0.774);
+}
+
+.closePopUpDark:hover{
+    background-color:#ad8c6c;
+}
+
+.closePopUp:hover{
+    background-color: rgba(182, 182, 182, 0.774);
+}
+
+#restrauntInfoFull{
+    height: 100%;
+    width: 70%;
+    height: 70%;
+}
+
+.restrauntInfoFull > div > p:hover{
+    color: white;
+}
+
+.restrauntInfoFull > a > h1 {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.restrauntInfoFull > div > p{
+    height: 30px;
+    border-radius: 15px;
+    width: 200px;
+}
+
+.restrauntInfoFull > h5 + p::before{
+   content: "Review: ";
+}
+
+.restrauntInfoFull > h5::before{
+    content: "Rating: "
+}
+
+
+section > div > a > div, .restrauntInfoFull {
+    border-radius: 15px;
+}
+
+.backgroundLight {
+    background-color: rgba(206,230,242,255);
+}
+
+.backgroundDark {
+    background-color: #f99f43;
+}
+
+.title > h1 {
+    position:absolute;
+    top: 15%;
+}
+
+.show{
+    display:block;
+}
+
+.showInfoPage{
+    display: -webkit-inline-box;
+}
+
+#postDeletion:hover{
+    background-color: rgba(182, 182, 182, 0.774);
+}
+
+#postDeletion{
+    height: 25px;
+    width:100px;
+    border-radius: 15px;
+}
+
+.listingsLight:hover{
+    box-shadow: 10px 5px 5px rgba(146,166,190,255);   
+    color: black;
+}
+
+.listingsDark:hover{
+    box-shadow: 10px 5px 5px #bc7936;   
+    color: black;
+}
+
+.fullInfoLight{
+    background-color: rgba(206,230,242,255);
+    box-shadow: 10px 5px 5px rgba(146,166,190,255);   
+}
+
+.fullInfoDark{
+    background-color: #f99f43;
+    box-shadow: 10px 5px 5px #95622e;   
+}
+
+
+#home{
+    width: 400px;
+}
+
+.noDecoration{
+    width: 100%;
+}
+
+.mainBody{
+    display: block;
+    width: 90%;
+    height: 90%;
+    border-radius: 15%
+}
+
+.hidden{
+    display: none;
+}
+
+@media (max-width:460px) or (max-height: 700px){
+#work { 
+    overflow: scroll;
+    height: 100%;
+}
+}
+
+@media (max-height: 780px) {
+    .mapPopUpActive{
+        height: 380px;
+    }
+}
+
+@media (max-width: 558px) {
+    #review {
+        width: 120px;
+    }
+
+    #review > h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width:400px){
+    .title{
+        width: 100%;
+    }
+
+    #introText {
+        font-size: 1rem;
+    }
+
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+}
+
+
+@media (max-height: 700px){
+
+    .title, section{
+        height: 77vh
+    }
+}

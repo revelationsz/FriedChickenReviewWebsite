@@ -1,0 +1,55 @@
+#infoHolder{
+    margin-top: 20px;
+    height:50px;
+    margin-left:10xp;
+}
+
+#formInfo{
+    width: 70%;
+}
+
+
+#formInfo > lable{
+    margin-right: 10px;
+}
+
+#formInfo > lable::after{
+    content: ":";
+}
+
+#formInfo > lable + input{
+    border-radius: 10px;
+    border: none;
+}
+
+
+#formInfo > lable + input:focus-visible{
+    box-shadow: 0 0 5px 6px rgb(149 160 177);
+    outline: none;
+}
+
+#creater{
+    margin-top: 10px;
+}
+
+#creater + div {
+    margin-top: 30px;
+}
+
+@media (max-width: 450px) and (min-width: 326px){
+    #formInfo > input{
+        width: 100px;
+    }
+}
+
+@media (max-width: 325px){
+    #formInfo > input{
+        width: 50px;
+    }
+}
+
+@media (max-height: 692px){
+    #infoHolder{
+        height: 40px
+    }
+}

@@ -1,0 +1,97 @@
+
+.dark:hover {
+    background-color:#f99f43;
+}
+
+.light:hover{
+    background-color:rgba(224, 190, 36, 0.7);
+}
+
+#restraunts + div {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#holder > a + a{
+    width:180px
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+header, footer{
+    background-color: rgba(224, 190, 36, 0.541);
+    height: 10vh;
+}
+
+#holder > a {
+    height: 8vh;
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+footer > div > h6 {
+    width:100px;
+    border-radius: 15px;
+    height: 25px;
+}
+
+@media (max-width:400px){
+    #home{
+        width: 100px;
+    }
+    #home > h2{
+        font-size: 10px;
+    }
+    #restraunts > h4 {
+        font-size: 7px;
+    }
+    #holder > a + a {
+        width: 45px;
+    }
+
+    .title > h1{
+        width: 200px;
+        font-size: 25px;
+    }
+
+    footer > div > h6{
+        font-size: 7px;
+    }
+
+}
+
+@media (min-width:401px) and (max-width:660px){
+    #home{
+        width: 200px;
+    }
+    #home > h2{
+        font-size: 20px;
+    }
+    #restraunts > h4 {
+        font-size: 15px;
+    }
+    #holder > a + a {
+        width: 90px;
+    }
+
+    .title > h1{
+        width: 400px;
+        font-size: 50px;
+    }
+
+    footer > div > h6{
+        font-size: 15px;
+    }
+
+}
+
+@media (max-height: 700px){
+    footer{
+        height: 12vh;
+    }
+}

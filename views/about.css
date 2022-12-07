@@ -1,0 +1,22 @@
+p::first-line{
+    font-weight:500;
+}
+
+p {
+    width: 70%; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+h2 + p {margin-top: 50px}
+
+.mainBody > h2 {
+    margin-top:20px
+}
+
+@media (max-width: 362px) {
+    p {
+        font-size: 12px;
+    }
+}
